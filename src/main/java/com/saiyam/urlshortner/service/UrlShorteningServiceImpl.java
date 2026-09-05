@@ -2,6 +2,7 @@ package com.saiyam.urlshortner.service;
 
 import com.saiyam.urlshortner.dto.ShortenUrlRequest;
 import com.saiyam.urlshortner.dto.ShortenUrlResponse;
+import com.saiyam.urlshortner.exception.AliasAlreadyExistsException;
 import com.saiyam.urlshortner.exception.InvalidUrlException;
 import com.saiyam.urlshortner.generator.ShortCodeGenerator;
 import com.saiyam.urlshortner.model.UrlMapping;
@@ -40,7 +41,7 @@ public class UrlShorteningServiceImpl implements UrlShorteningService {
             shortCode = request.customAlias();
 
             if (urlRepository.existsByShortCode(shortCode)) {
-                throw new IllegalArgumentException("Custom alias already exists");
+                throw new AliasAlreadyExistsException("Custom alias already exists");
             }
         } else {
             do {

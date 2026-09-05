@@ -14,6 +14,12 @@ public class GlobalExceptionHandler {
         return new ErrorResponse(exception.getMessage());
     }
 
+    @ExceptionHandler(AliasAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponse handleAliasAlreadyExists(AliasAlreadyExistsException exception) {
+        return new ErrorResponse(exception.getMessage());
+    }
+
     public record ErrorResponse(String message) {
     }
 }
