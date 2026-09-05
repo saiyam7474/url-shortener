@@ -9,4 +9,6 @@ public interface UrlRepository {
     UrlMapping save(UrlMapping mapping);
 
     Optional<UrlMapping> findByShortCode(String shortCode);
+
+    boolean existsByShortCode(String shortCode);
 }

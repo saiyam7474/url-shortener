@@ -37,4 +37,9 @@ public class UrlRepositoryAdapter implements UrlRepository {
                                 entity.getOriginalUrl()
                         ));
     }
+
+    @Override
+    public boolean existsByShortCode(String shortCode) {
+        return jpaRepository.existsById(shortCode);
+    }
 }

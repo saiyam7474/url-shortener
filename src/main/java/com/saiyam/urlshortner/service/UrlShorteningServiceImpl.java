@@ -22,7 +22,11 @@ public class UrlShorteningServiceImpl implements UrlShorteningService {
 
     @Override
     public ShortenUrlResponse shorten(ShortenUrlRequest request) {
-        String shortCode = shortCodeGenerator.generate();
+        String shortCode;
+
+        do {
+            shortCode = shortCodeGenerator.generate();
+        } while (urlRepository.existsByShortCode(shortCode));
 
         UrlMapping mapping = new UrlMapping(
                 shortCode,
