@@ -1,7 +1,7 @@
 package com.saiyam.urlshortner.controller;
 
-import com.saiyam.urlshortner.model.ShortenUrlRequest;
-import com.saiyam.urlshortner.model.ShortenUrlResponse;
+import com.saiyam.urlshortner.dto.ShortenUrlRequest;
+import com.saiyam.urlshortner.dto.ShortenUrlResponse;
 import com.saiyam.urlshortner.service.UrlShorteningService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

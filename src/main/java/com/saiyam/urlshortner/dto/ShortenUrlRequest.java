@@ -1,4 +1,4 @@
-package com.saiyam.urlshortner.model;
+package com.saiyam.urlshortner.dto;
 
 public record ShortenUrlRequest(String url) {
 }
