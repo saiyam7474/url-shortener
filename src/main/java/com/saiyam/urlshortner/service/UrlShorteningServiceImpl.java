@@ -31,14 +31,22 @@ public class UrlShorteningServiceImpl implements UrlShorteningService {
     public ShortenUrlResponse shorten(ShortenUrlRequest request) {
 
         if (!urlValidator.isValid(request.url())) {
-            throw new InvalidUrlException("Invalid URL passed");
+            throw new InvalidUrlException("Invalid URL");
         }
 
         String shortCode;
 
-        do {
-            shortCode = shortCodeGenerator.generate();
-        } while (urlRepository.existsByShortCode(shortCode));
+        if (request.customAlias() != null && !request.customAlias().isBlank()) {
+            shortCode = request.customAlias();
+
+            if (urlRepository.existsByShortCode(shortCode)) {
+                throw new IllegalArgumentException("Custom alias already exists");
+            }
+        } else {
+            do {
+                shortCode = shortCodeGenerator.generate();
+            } while (urlRepository.existsByShortCode(shortCode));
+        }
 
         UrlMapping mapping = new UrlMapping(
                 shortCode,
