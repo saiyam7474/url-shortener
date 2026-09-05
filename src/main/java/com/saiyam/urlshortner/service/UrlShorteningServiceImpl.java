@@ -9,6 +9,8 @@ import com.saiyam.urlshortner.repository.UrlRepository;
 import org.springframework.stereotype.Service;
 import com.saiyam.urlshortner.validation.UrlValidator;
 
+import java.util.Optional;
+
 @Service
 public class UrlShorteningServiceImpl implements UrlShorteningService {
 
@@ -46,5 +48,11 @@ public class UrlShorteningServiceImpl implements UrlShorteningService {
         urlRepository.save(mapping);
 
         return new ShortenUrlResponse(shortCode);
+    }
+
+    @Override
+    public Optional<String> getOriginalUrl(String shortCode) {
+        return urlRepository.findByShortCode(shortCode)
+                .map(UrlMapping::originalUrl);
     }
 }
